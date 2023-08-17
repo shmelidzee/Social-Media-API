@@ -16,6 +16,12 @@ public class ExceptionServiceImpl implements ExceptionService {
 
     private static final String UNKNOWN_ERROR_ON_SERVER = "UNKNOWN ERROR ON SERVER";
 
+    /**
+     * Create error for user
+     * If exception is null code message will be UNKNOWN
+     *
+     * @param exception - data exception
+     */
     @Override
     public UiErrorDTO buildUiErrorDTO(ApplicationException exception) {
         if (isNull(exception)) {

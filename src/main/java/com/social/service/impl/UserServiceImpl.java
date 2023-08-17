@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import static com.social.utils.ExceptionConstants.INCORRECT_REGISTER_PASSWORD;
-import static com.social.utils.ExceptionConstants.INVALID_REGISTER_DATE;
+import static com.social.utils.ExceptionConstants.INVALID_REGISTER_DATA;
 import static com.social.utils.ExceptionConstants.USER_NOT_FOUND;
 import static com.social.utils.ExceptionUtils.buildApplicationException;
 
@@ -45,6 +45,12 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         return userMapper.mapToUserDetails(user);
     }
 
+    /**
+     * Get user details by id
+     *
+     * @param id - user id
+     * @throws ApplicationException - throw exception if user not found
+     */
     @Override
     @Transactional
     public UserDetails loadUserDetailsByUserId(Long id) throws ApplicationException {
@@ -53,6 +59,12 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         return userMapper.mapToUserDetails(user);
     }
 
+    /**
+     * Get user by id
+     *
+     * @param userId - user id
+     * @throws ApplicationException - throw exception if user not found
+     */
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public User findUserById(Long userId) throws ApplicationException {
@@ -63,6 +75,12 @@ public class UserServiceImpl implements UserDetailsService, UserService {
                 });
     }
 
+    /**
+     * Get user by email
+     *
+     * @param email - email
+     * @throws ApplicationException - throw exception if user not found
+     */
     @Override
     public User findUserByEmail(String email) throws ApplicationException {
         log.info("Get user by email: {}", email);
@@ -70,6 +88,12 @@ public class UserServiceImpl implements UserDetailsService, UserService {
                 .orElseThrow(() -> buildApplicationException(HttpStatus.BAD_REQUEST, USER_NOT_FOUND));
     }
 
+    /**
+     * Get user by username
+     *
+     * @param username - username
+     * @throws ApplicationException - throw exception if user not found
+     */
     @Override
     public User findUserByUsername(String username) throws ApplicationException {
         log.info("Get user by email: {}", username);
@@ -77,12 +101,24 @@ public class UserServiceImpl implements UserDetailsService, UserService {
                 .orElseThrow(() -> buildApplicationException(HttpStatus.BAD_REQUEST, USER_NOT_FOUND));
     }
 
+    /**
+     * Check passwords on the same
+     *
+     * @param user     - user account
+     * @param password - password
+     */
     @Override
     public boolean matchPassword(User user, String password) {
         log.info("Check password for user {}", user.getEmail());
         return passwordEncoder.matches(password, user.getPassword());
     }
 
+    /**
+     * Register new account
+     *
+     * @param registrationCommand - data for register
+     * @throws ApplicationException - throw exception if data is not valid
+     */
     @Override
     public void registerUser(RegistrationCommand registrationCommand) throws ApplicationException {
         log.info("Create new user: {}", registrationCommand);
@@ -102,10 +138,10 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     private void validateRegisterCommand(RegistrationCommand command) throws ApplicationException {
         if (command.getUsername().length() < MIN_SIZE_USERNAME_AND_PASSWORD || command.getUsername().length() > MAX_SIZE_NAME_AND_PASSWORD) {
-            throw buildApplicationException(HttpStatus.BAD_REQUEST, INVALID_REGISTER_DATE);
+            throw buildApplicationException(HttpStatus.BAD_REQUEST, INVALID_REGISTER_DATA);
         }
         if (command.getEmail().length() < MIN_SIZE_USERNAME_AND_PASSWORD) {
-            throw buildApplicationException(HttpStatus.BAD_REQUEST, INVALID_REGISTER_DATE);
+            throw buildApplicationException(HttpStatus.BAD_REQUEST, INVALID_REGISTER_DATA);
         }
         if (command.getPassword().length() < MIN_LENGTH_PASSWORD || command.getPassword().length() > MAX_SIZE_NAME_AND_PASSWORD) {
             throw buildApplicationException(HttpStatus.BAD_REQUEST, INCORRECT_REGISTER_PASSWORD);

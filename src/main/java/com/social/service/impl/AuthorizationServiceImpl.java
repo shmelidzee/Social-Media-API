@@ -26,6 +26,12 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     private final JwtTokenProvider jwtTokenGenerator;
     private final UserMapper userMapper;
 
+    /**
+     * Log in user account
+     *
+     * @param loginCommand - data for log in account
+     * @throws ApplicationException If user not found or incorrect data
+     */
     @Override
     public UserLoginDTO login(LoginCommand loginCommand) throws ApplicationException {
         User user;
