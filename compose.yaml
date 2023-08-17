@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:13.3
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: social
+    volumes:
+      - ./src/main/resources/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+  sociaal-service:
+    container_name: social-service
+    image: social-service:1.0.0
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - 8085:8085
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/social
