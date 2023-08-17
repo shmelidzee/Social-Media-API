@@ -29,7 +29,7 @@ import javax.persistence.Table;
 @Builder
 @NoArgsConstructor(force = true)
 @AllArgsConstructor
-@SequenceGenerator(name = "SQ_USER_ID_GENERATOR", sequenceName = "SQ_USER_ID", allocationSize = 1)
+@SequenceGenerator(name = "SQ_USER_ID_GENERATOR", sequenceName = "USERS_ID_SEQ", allocationSize = 1, initialValue = 2)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_USER_ID_GENERATOR")

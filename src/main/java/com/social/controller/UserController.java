@@ -8,11 +8,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
@@ -24,7 +23,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping(value = "/register", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/register")
     @Operation(summary = "Register user",
             description = "Register user",
             responses = {
@@ -33,8 +32,7 @@ public class UserController {
                     @ApiResponse(responseCode = "400", description = "Bad request")
             },
             tags = "User")
-    public ResponseEntity<Void> registration(@RequestParam("registrationCommand")
-                                             RegistrationCommand registrationCommand) throws ApplicationException {
+    public ResponseEntity<Void> registration(@RequestBody RegistrationCommand registrationCommand) throws ApplicationException {
         userService.registerUser(registrationCommand);
         return ResponseEntity.ok().build();
     }
