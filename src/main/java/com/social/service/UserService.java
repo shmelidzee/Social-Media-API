@@ -5,6 +5,8 @@ import com.social.domain.entities.User;
 import com.social.exception.ApplicationException;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.security.Principal;
+
 public interface UserService {
 
     UserDetails loadUserDetailsByUserId(Long id) throws ApplicationException;
@@ -18,4 +20,6 @@ public interface UserService {
     boolean matchPassword(User user, String password) throws ApplicationException;
 
     void registerUser(RegistrationCommand registrationCommand) throws ApplicationException;
+
+    User findUserByPrincipal(Principal principal) throws ApplicationException;
 }

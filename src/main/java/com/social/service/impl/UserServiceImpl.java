@@ -19,6 +19,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.Principal;
+
 import static com.social.utils.ExceptionConstants.INCORRECT_REGISTER_PASSWORD;
 import static com.social.utils.ExceptionConstants.INVALID_REGISTER_DATA;
 import static com.social.utils.ExceptionConstants.USER_NOT_FOUND;
@@ -125,6 +127,21 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         validateRegisterCommand(registrationCommand);
         User user = createUser(registrationCommand);
         userRepository.save(user);
+    }
+
+    /**
+     * Find user by principal
+     *
+     * @param principal - principal
+     * @throws ApplicationException - throw exception if user not found
+     */
+    @Override
+    public User findUserByPrincipal(Principal principal) throws ApplicationException {
+        return userRepository.findByUsername(principal.getName())
+                .orElseThrow(() -> {
+                    log.error("Could not find user with username {}", principal.getName());
+                    return buildApplicationException(HttpStatus.BAD_REQUEST, USER_NOT_FOUND);
+                });
     }
 
     private User createUser(RegistrationCommand command) {
