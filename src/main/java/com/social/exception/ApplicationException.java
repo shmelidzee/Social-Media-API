@@ -26,6 +26,7 @@ public class ApplicationException extends Exception {
 
     public ApplicationException(HttpStatus status, String responseMessage) {
         super(responseMessage);
+        this.responseMessage = responseMessage;
         this.status = status;
     }
 }

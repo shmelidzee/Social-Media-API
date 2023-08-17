@@ -11,7 +11,7 @@ public class ExceptionUtils {
     public static ApplicationException buildApplicationException(HttpStatus status, String message){
         return ApplicationException.builder()
                 .status(status)
-                .responseMessage(String.valueOf(message))
+                .responseMessage(message)
                 .build();
     }
 }

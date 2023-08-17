@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
 @Slf4j
@@ -33,6 +34,6 @@ public class ExceptionController {
     public ResponseEntity<UiErrorDTO> handleApplicationException(ApplicationException ex) {
         UiErrorDTO uiErrorDto = exceptionService.buildUiErrorDTO(ex);
         log.error(ex.getMessage(), ex);
-        return ResponseEntity.status(ex.getStatus()).body(uiErrorDto);
+        return ResponseEntity.badRequest().body(uiErrorDto);
     }
 }

@@ -6,11 +6,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import com.social.security.UserDetailsImpl;
 
-
 @Mapper(componentModel = "spring", unmappedTargetPolicy = org.mapstruct.ReportingPolicy.IGNORE)
 public interface UserMapper {
 
-    @Mapping(target = "role", source = "role.name")
+    @Mapping(target = "role", source = "user.role.name")
     @Mapping(target = "accessToken", source = "token")
     UserLoginDTO loginToDTO(User user, String token);
 

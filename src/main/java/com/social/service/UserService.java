@@ -1,5 +1,6 @@
 package com.social.service;
 
+import com.social.command.RegistrationCommand;
 import com.social.domain.entities.User;
 import com.social.exception.ApplicationException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,4 +16,6 @@ public interface UserService {
     User findUserByUsername(String username) throws ApplicationException;
 
     boolean matchPassword(User user, String password) throws ApplicationException;
+
+    void registerUser(RegistrationCommand registrationCommand) throws ApplicationException;
 }
