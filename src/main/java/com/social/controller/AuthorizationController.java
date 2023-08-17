@@ -2,6 +2,7 @@ package com.social.controller;
 
 import com.social.command.LoginCommand;
 import com.social.dto.UserLoginDTO;
+import com.social.exception.ApplicationException;
 import com.social.service.AuthorizationService;
 import io.micrometer.core.annotation.Timed;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,7 +28,7 @@ public class AuthorizationController {
     @CrossOrigin
     @PostMapping("/login")
     @Operation(description = "Login", tags = "Authorization")
-    public ResponseEntity<UserLoginDTO> login(@RequestBody @Valid LoginCommand loginCommand) {
+    public ResponseEntity<UserLoginDTO> login(@RequestBody @Valid LoginCommand loginCommand) throws ApplicationException {
         UserLoginDTO user = authorizationService.login(loginCommand);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }

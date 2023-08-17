@@ -31,7 +31,6 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @SequenceGenerator(name = "SQ_USER_ID_GENERATOR", sequenceName = "SQ_USER_ID", allocationSize = 1)
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_USER_ID_GENERATOR")
     @Column(name = "ID", nullable = false)
