@@ -1,5 +1,5 @@
 # Social Media API
-
+Implementation of a basic REST API for a social network
 
 # How to run application
 1. Clone repository, go to root directory
