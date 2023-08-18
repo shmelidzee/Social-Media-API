@@ -5,6 +5,7 @@ import com.social.domain.entities.User;
 import com.social.domain.enums.ChatType;
 import com.social.dto.ChatDTO;
 import com.social.exception.ApplicationException;
+import com.social.mapper.ChatMapper;
 import com.social.repository.ChatRepository;
 import com.social.service.ChatService;
 import com.social.service.ChatUsersService;
@@ -12,13 +13,13 @@ import com.social.service.FollowerService;
 import com.social.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.time.Instant;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.social.utils.ExceptionConstants.CHAT_ALREADY_EXISTS;
 import static com.social.utils.ExceptionConstants.USERS_NOT_FRIENDS;
@@ -33,6 +34,7 @@ public class ChatServiceImpl implements ChatService {
     private final UserService userService;
     private final FollowerService followerService;
     private final ChatUsersService chatUsersService;
+    private final ChatMapper chatMapper;
 
     @Override
     public void createDualChat(Long userId, Principal principal) throws ApplicationException {
@@ -48,17 +50,20 @@ public class ChatServiceImpl implements ChatService {
     }
 
     @Override
-    public Page<ChatDTO> getChats(PageRequest pageable, Principal principal) throws ApplicationException {
+    public List<ChatDTO> getChats(Principal principal) throws ApplicationException {
         User user = userService.findUserByPrincipal(principal);
         log.info("Get chats user: {}", user.getUsername());
-        //переписать получение чатов
-        return null;
+        List<Chat> chats = chatRepository.getChats(user.getId());
+        return chats.stream()
+                .map(chatMapper::entityToDTO)
+                .collect(Collectors.toList());
     }
 
     private Chat buildChat(Long userId, User user, ChatType type) throws ApplicationException {
         return Chat.builder()
                 .admin(user.getId())
                 .type(type)
+                .name(String.format("DUAL CHAT BETWEEN %s AND %s", user.getUsername(), userService.findUserById(userId).getUsername()))
                 .chatUsers(chatUsersService.saveChatUsers(userId, user))
                 .createdAt(Instant.now())
                 .updatedAt(Instant.now())

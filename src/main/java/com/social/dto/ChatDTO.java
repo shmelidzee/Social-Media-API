@@ -18,8 +18,8 @@ import java.time.Instant;
 @ToString
 public class ChatDTO {
     private Long chatId;
+    private String name;
     private ChatType type;
     private Instant createdAt;
     private Instant updatedAt;
-    private Long[] membersChat;
 }
