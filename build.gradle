@@ -73,4 +73,17 @@ jacocoTestReport {
         csv.required = false
         html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
     }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    "com/social/dto/**",
+                    "com/social/config/**",
+                    "com/social/controller/**",
+                    "com/social/domain/**",
+                    "com/social/repository/**",
+                    "com/social/security/**",
+                    "com/social/mapper/**",
+            ])
+        }))
+    }
 }
