@@ -46,7 +46,7 @@ public class FollowerServiceImpl implements FollowerService {
     @Override
     public boolean isFriend(Long fromUserId, Long toUserId) {
         log.info("Check is friends users with id: {}, {}", fromUserId, toUserId);
-        return followerRepository.isFriend(toUserId, fromUserId);
+        return friendsRepository.isFriend(toUserId, fromUserId);
     }
 
     /**
@@ -62,10 +62,15 @@ public class FollowerServiceImpl implements FollowerService {
         log.info("User {} unfollow from {}", user.getId(), userId);
         Follower follower = getFollowerEntity(userId, user);
         followerRepository.delete(follower);
-        Friends friends = getFriendsEntity(userId, user);
-        friends.setAccepted(false);
-        friends.setRead(true);
-        friendsRepository.save(friends);
+        Optional<Friends> friend = friendsRepository.getRequestFromUser(user.getId(), userId);
+        if (friend.isPresent()) {
+            friendsRepository.delete(friend.get());
+        } else {
+            Friends friends = getFriendsEntity(userId, user);
+            friends.setAccepted(false);
+            friends.setRead(true);
+            friendsRepository.save(friends);
+        }
     }
 
     /**
@@ -100,7 +105,7 @@ public class FollowerServiceImpl implements FollowerService {
         friends.setAccepted(true);
         friends.setRead(true);
         friendsRepository.save(friends);
-        Follower follower = buildFollower(user, userService.findUserById(userId));
+        Follower follower = buildFollower(userService.findUserById(userId), user);
         followerRepository.save(follower);
     }
 

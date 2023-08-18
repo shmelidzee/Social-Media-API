@@ -13,14 +13,6 @@ import java.util.Optional;
 @Repository
 public interface FollowerRepository extends JpaRepository<Follower, Long> {
 
-    @Query(value = "SELECT EXISTS (\n" +
-            "    SELECT f.id\n" +
-            "    FROM Follower f\n" +
-            "    WHERE (f.fromUser.id = :fromUser AND f.toUser.id = :toUser)\n" +
-            "        OR (f.toUser.id = :fromUser AND f.fromUser.id = :toUser))" +
-            "FROM Follower")
-    boolean isFriend(Long toUser, Long fromUser);
-
     Optional<Follower> getFollowerByFromUserIdAndToUserId(Long fromUserId, Long toUserId);
 
     @Query(value = "select\n" +

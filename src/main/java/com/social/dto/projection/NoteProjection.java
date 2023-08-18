@@ -14,5 +14,5 @@ public interface NoteProjection {
 
     String getAuthorUsername();
 
-    String getCreateAt();
+    String getCreatedAt();
 }

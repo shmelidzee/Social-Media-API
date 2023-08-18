@@ -30,7 +30,7 @@ public class FollowerController {
 
     private final FollowerService followerService;
 
-    @GetMapping({"/friends", "/friends/{userId}"})
+    @GetMapping("/friends")
     @Operation(summary = "Get my friends or friends other user",
             description = "Get my friends or friends other user",
             responses = {
@@ -40,14 +40,14 @@ public class FollowerController {
             tags = "Followers")
     public ResponseEntity<PageDTO<UserDTO>> getFriends(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
                                                        @RequestParam(value = "size", required = false, defaultValue = "10") int size,
-                                                       @PathVariable(value = "userId", required = false) Long userId,
+                                                       @RequestParam(value = "userId", required = false) Long userId,
                                                        Principal principal) throws ApplicationException {
         Pageable pageable = Pageable.ofSize(size).withPage(page);
         PageDTO<UserDTO> users = followerService.getFriends(userId, pageable, principal);
         return ResponseEntity.ok(users);
     }
 
-    @GetMapping({"/subscribes", "/subscribes/{userId}"})
+    @GetMapping("/subscribes")
     @Operation(summary = "Get my subscribes or subscribes other user",
             description = "Get my subscribes or subscribes other user",
             responses = {
@@ -57,14 +57,14 @@ public class FollowerController {
             tags = "Followers")
     public ResponseEntity<PageDTO<UserDTO>> getSubscribes(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
                                                           @RequestParam(value = "size", required = false, defaultValue = "10") int size,
-                                                          @PathVariable(value = "userId", required = false) Long userId,
+                                                          @RequestParam(value = "userId", required = false) Long userId,
                                                           Principal principal) throws ApplicationException {
         Pageable pageable = Pageable.ofSize(size).withPage(page);
         PageDTO<UserDTO> users = followerService.getSubscribes(userId, pageable, principal);
         return ResponseEntity.ok(users);
     }
 
-    @GetMapping({"/subscribers", "/subscribers/{userId}"})
+    @GetMapping("/subscribers")
     @Operation(summary = "Get my subscribers or subscribers other user",
             description = "Get my subscribes or subscribes other user",
             responses = {
@@ -74,7 +74,7 @@ public class FollowerController {
             tags = "Followers")
     public ResponseEntity<PageDTO<UserDTO>> getSubscribers(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
                                                            @RequestParam(value = "size", required = false, defaultValue = "10") int size,
-                                                           @PathVariable(value = "userId", required = false) Long userId,
+                                                           @RequestParam(value = "userId", required = false) Long userId,
                                                            Principal principal) throws ApplicationException {
         Pageable pageable = Pageable.ofSize(size).withPage(page);
         PageDTO<UserDTO> users = followerService.getSubscribers(userId, pageable, principal);

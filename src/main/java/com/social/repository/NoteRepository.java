@@ -17,7 +17,7 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
             "       n.text,\n" +
             "       n.images,\n" +
             "       n.user_id    as authorId,\n" +
-            "       u.username   as username,\n" +
+            "       u.username   as authorUsername,\n" +
             "       n.created_at as createdAt\n" +
             "FROM notes n\n" +
             "         LEFT JOIN users u on u.id = n.user_id\n" +

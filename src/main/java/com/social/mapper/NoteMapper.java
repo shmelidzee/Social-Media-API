@@ -14,5 +14,6 @@ public interface NoteMapper {
     @Mapping(target = "createdAt", source = "createdAt")
     NoteDTO entityToDTO(Note note);
 
+
     NoteDTO projectionToDTO(NoteProjection projection);
 }

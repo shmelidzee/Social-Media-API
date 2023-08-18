@@ -30,7 +30,7 @@ import java.security.Principal;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/notes")
-@Tag(name = "Notes", description = "Note API")
+@Tag(name = "Note", description = "Note API")
 public class NoteController {
 
     private final NoteService noteService;

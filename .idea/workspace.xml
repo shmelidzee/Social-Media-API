@@ -4,7 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba4e3968-b9db-4f0d-9563-0cf7d7467094" name="Changes" comment="add main API" />
+    <list default="true" id="ba4e3968-b9db-4f0d-9563-0cf7d7467094" name="Changes" comment="refactoring some code">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/social/controller/FollowerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/social/controller/FollowerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/social/controller/NoteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/social/controller/NoteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/social/dto/projection/NoteProjection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/social/dto/projection/NoteProjection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/social/mapper/NoteMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/social/mapper/NoteMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/social/repository/ChatUsersRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/social/repository/ChatUsersRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/social/repository/FollowerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/social/repository/FollowerRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/social/repository/FriendsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/social/repository/FriendsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/social/repository/NoteRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/social/repository/NoteRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/social/service/ChatUsersService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/social/service/ChatUsersService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/social/service/impl/ChatServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/social/service/impl/ChatServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/social/service/impl/ChatUsersServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/social/service/impl/ChatUsersServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/social/service/impl/FollowerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/social/service/impl/FollowerServiceImpl.java" afterDir="false" />
+    </list>
+    <list id="5302bafa-95eb-4c2a-bc6a-a3b9ed018f2a" name="dev" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,6 +46,15 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
@@ -39,10 +64,20 @@
     "RequestMappingsPanelWidth1": "75",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "git-widget-placeholder": "master",
     "node.js.selected.package.tslint": "(autodetect)"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.social.service.impl" />
+    </key>
+  </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="gradle cleand build" />
@@ -50,7 +85,7 @@
     </option>
   </component>
   <component name="RunManager" selected="Spring Boot.SocialMediaApplication">
-    <configuration name="social-media [clean build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="UserServiceImplTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -61,19 +96,20 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="clean" />
-            <option value="build" />
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.social.service.impl.UserServiceImplTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <ForceTestExec>false</ForceTestExec>
+      <ForceTestExec>true</ForceTestExec>
       <method v="2" />
     </configuration>
-    <configuration name="social-media [cleand build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="UserServiceImplTest.should_get_user_by_id_in_load" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -84,16 +120,65 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="cleand" />
-            <option value="build" />
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.social.service.impl.UserServiceImplTest.should_get_user_by_id_in_load&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <ForceTestExec>false</ForceTestExec>
+      <ForceTestExec>true</ForceTestExec>
+      <method v="2" />
+    </configuration>
+    <configuration name="UserServiceImplTest.should_return_true_if_passwords_the_same" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.social.service.impl.UserServiceImplTest.should_return_true_if_passwords_the_same&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>true</ForceTestExec>
+      <method v="2" />
+    </configuration>
+    <configuration name="UserServiceImplTest.should_throw_exception_if_user_not_found_by_principal" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.social.service.impl.UserServiceImplTest.should_throw_exception_if_user_not_found_by_principal&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>true</ForceTestExec>
       <method v="2" />
     </configuration>
     <configuration name="SocialMediaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
@@ -112,8 +197,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.SocialMediaApplication" />
-        <item itemvalue="Gradle.social-media [clean build]" />
-        <item itemvalue="Gradle.social-media [cleand build]" />
+        <item itemvalue="Gradle.UserServiceImplTest.should_get_user_by_id_in_load" />
+        <item itemvalue="Gradle.UserServiceImplTest" />
+        <item itemvalue="Gradle.UserServiceImplTest.should_return_true_if_passwords_the_same" />
+        <item itemvalue="Gradle.UserServiceImplTest.should_throw_exception_if_user_not_found_by_principal" />
       </list>
     </recent_temporary>
   </component>
@@ -126,12 +213,94 @@
       <option name="project" value="LOCAL" />
       <updated>1692313940170</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add test for user service">
+      <option name="closed" value="true" />
+      <created>1692317428376</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1692317428376</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add logic for chats">
+      <option name="closed" value="true" />
+      <created>1692322113430</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1692322113430</updated>
+    </task>
+    <task id="LOCAL-00004" summary="update chats">
+      <option name="closed" value="true" />
+      <created>1692323903807</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1692323903807</updated>
+    </task>
+    <task id="LOCAL-00005" summary="update note controller">
+      <option name="closed" value="true" />
+      <created>1692324702638</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1692324702638</updated>
+    </task>
+    <task id="LOCAL-00006" summary="add new logic for followers">
+      <option name="closed" value="true" />
+      <created>1692352698167</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1692352698167</updated>
+    </task>
+    <task id="LOCAL-00007" summary="update note service">
+      <option name="closed" value="true" />
+      <created>1692356353312</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1692356353312</updated>
+    </task>
+    <task id="LOCAL-00008" summary="refactoring some code">
+      <option name="closed" value="true" />
+      <created>1692358235647</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1692358235647</updated>
+    </task>
+    <task id="LOCAL-00009" summary="refactoring some code">
+      <option name="closed" value="true" />
+      <created>1692359466309</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1692359466309</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add main API" />
-    <option name="LAST_COMMIT_MESSAGE" value="add main API" />
+    <MESSAGE value="add test for user service" />
+    <MESSAGE value="add logic for chats" />
+    <MESSAGE value="update chats" />
+    <MESSAGE value="update note controller" />
+    <MESSAGE value="add new logic for followers" />
+    <MESSAGE value="update note service" />
+    <MESSAGE value="refactoring some code" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactoring some code" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/social/service/impl/ChatServiceImpl.java</url>
+          <line>59</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
