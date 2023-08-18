@@ -1,5 +1,9 @@
 package com.social.controller;
 
+import com.social.command.CreateNoteCommand;
+import com.social.command.UpdateNoteCommand;
+import com.social.dto.NoteDTO;
+import com.social.exception.ApplicationException;
 import com.social.service.NoteService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,8 +41,10 @@ public class NoteController {
                     @ApiResponse(responseCode = "400", description = "Bad request")
             },
             tags = "Note")
-    public ResponseEntity<Void> createNewNote(Principal principal) {
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<NoteDTO> createNewNote(@RequestBody CreateNoteCommand createNoteCommand,
+                                                 Principal principal) {
+        NoteDTO note = noteService.createNote(createNoteCommand, principal);
+        return ResponseEntity.ok(note);
     }
 
     @GetMapping("/tape")
@@ -76,9 +83,11 @@ public class NoteController {
                     @ApiResponse(responseCode = "400", description = "Bad request")
             },
             tags = "Note")
-    public ResponseEntity<Void> updateMyNote(@PathVariable(name = "noteId") Long noteId,
-                                             Principal principal) {
-        return ResponseEntity.ok(null);
+    public ResponseEntity<NoteDTO> updateMyNote(@RequestBody UpdateNoteCommand updateNoteCommand,
+                                                @PathVariable(name = "noteId") Long noteId,
+                                                Principal principal) {
+        NoteDTO note = noteService.updateNote(updateNoteCommand, noteId, principal);
+        return ResponseEntity.ok(note);
     }
 
     @DeleteMapping("/{noteId}")
@@ -90,7 +99,8 @@ public class NoteController {
             },
             tags = "Note")
     public ResponseEntity<Void> deleteMyNote(@PathVariable(name = "noteId") Long noteId,
-                                             Principal principal) {
-        return ResponseEntity.ok(null);
+                                             Principal principal) throws ApplicationException {
+        noteService.deleteNote(noteId, principal);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
