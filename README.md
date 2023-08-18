@@ -11,7 +11,7 @@ sh run.sh will build the application and run it in a docker container
 6. Paste the token into the authorization window
 7. Select the required request and execute it
 8. Check results requests
-![image](https://github.com/shmelidzee/Social-Media-API/assets/100793483/c4bdb398-a0b6-4387-b3e4-05be81fab4a6)
+![image](https://github.com/shmelidzee/Social-Media-API/assets/100793483/903ef943-79bf-4c40-89c0-d7884bb9a393)
 
 
 # How to run tests
