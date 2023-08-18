@@ -1,7 +1,9 @@
 package com.social.mapper;
 
 import com.social.domain.entities.User;
+import com.social.dto.UserDTO;
 import com.social.dto.UserLoginDTO;
+import com.social.dto.projection.UserProjection;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import com.social.security.UserDetailsImpl;
@@ -19,4 +21,6 @@ public interface UserMapper {
     @Mapping(target = "enabled", defaultValue = "true")
     @Mapping(target = "locked", defaultValue = "false")
     UserDetailsImpl mapToUserDetails(User user);
+
+    UserDTO projectionToDTO(UserProjection projection);
 }

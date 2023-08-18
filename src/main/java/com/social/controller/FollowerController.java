@@ -1,11 +1,15 @@
 package com.social.controller;
 
+import com.social.dto.PageDTO;
+import com.social.dto.UserDTO;
+import com.social.exception.ApplicationException;
 import com.social.service.FollowerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,11 +38,13 @@ public class FollowerController {
                     @ApiResponse(responseCode = "400", description = "Bad request")
             },
             tags = "Followers")
-        public ResponseEntity<?> getFriends(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
-                                            @RequestParam(value = "size", required = false, defaultValue = "10") int size,
-                                        @PathVariable(value = "userId", required = false) Long userId,
-                                        Principal principal) {
-        return ResponseEntity.ok(null);
+    public ResponseEntity<PageDTO<UserDTO>> getFriends(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
+                                                       @RequestParam(value = "size", required = false, defaultValue = "10") int size,
+                                                       @PathVariable(value = "userId", required = false) Long userId,
+                                                       Principal principal) throws ApplicationException {
+        Pageable pageable = Pageable.ofSize(size).withPage(page);
+        PageDTO<UserDTO> users = followerService.getFriends(userId, pageable, principal);
+        return ResponseEntity.ok(users);
     }
 
     @GetMapping({"/subscribes", "/subscribes/{userId}"})
@@ -49,11 +55,13 @@ public class FollowerController {
                     @ApiResponse(responseCode = "400", description = "Bad request")
             },
             tags = "Followers")
-    public ResponseEntity<?> getSubscribes(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
-                                           @RequestParam(value = "size", required = false, defaultValue = "10") int size,
-                                           @PathVariable(value = "userId", required = false) Long userId,
-                                           Principal principal) {
-        return ResponseEntity.ok(null);
+    public ResponseEntity<PageDTO<UserDTO>> getSubscribes(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
+                                                          @RequestParam(value = "size", required = false, defaultValue = "10") int size,
+                                                          @PathVariable(value = "userId", required = false) Long userId,
+                                                          Principal principal) throws ApplicationException {
+        Pageable pageable = Pageable.ofSize(size).withPage(page);
+        PageDTO<UserDTO> users = followerService.getSubscribes(userId, pageable, principal);
+        return ResponseEntity.ok(users);
     }
 
     @GetMapping({"/subscribers", "/subscribers/{userId}"})
@@ -64,11 +72,13 @@ public class FollowerController {
                     @ApiResponse(responseCode = "400", description = "Bad request")
             },
             tags = "Followers")
-    public ResponseEntity<?> getSubscribers(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
-                                            @RequestParam(value = "size", required = false, defaultValue = "10") int size,
-                                            @PathVariable(value = "userId", required = false) Long userId,
-                                            Principal principal) {
-        return ResponseEntity.ok(null);
+    public ResponseEntity<PageDTO<UserDTO>> getSubscribers(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
+                                                           @RequestParam(value = "size", required = false, defaultValue = "10") int size,
+                                                           @PathVariable(value = "userId", required = false) Long userId,
+                                                           Principal principal) throws ApplicationException {
+        Pageable pageable = Pageable.ofSize(size).withPage(page);
+        PageDTO<UserDTO> users = followerService.getSubscribers(userId, pageable, principal);
+        return ResponseEntity.ok(users);
     }
 
     @PostMapping("/follow/{userId}")
@@ -80,7 +90,8 @@ public class FollowerController {
             },
             tags = "Followers")
     public ResponseEntity<Void> followOnUser(@PathVariable(name = "userId") Long userId,
-                                             Principal principal) {
+                                             Principal principal) throws ApplicationException {
+        followerService.sentRequestToFriend(userId, principal);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -93,7 +104,8 @@ public class FollowerController {
             },
             tags = "Followers")
     public ResponseEntity<Void> acceptFollow(@PathVariable(name = "userId") Long userId,
-                                             Principal principal) {
+                                             Principal principal) throws ApplicationException {
+        followerService.acceptInvite(userId, principal);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -106,7 +118,8 @@ public class FollowerController {
             },
             tags = "Followers")
     public ResponseEntity<Void> rejectFollow(@PathVariable(name = "userId") Long userId,
-                                             Principal principal) {
+                                             Principal principal) throws ApplicationException {
+        followerService.rejectRequestInFriend(userId, principal);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -119,7 +132,8 @@ public class FollowerController {
             },
             tags = "Followers")
     public ResponseEntity<Void> unfollowUser(@PathVariable(name = "userId") Long userId,
-                                             Principal principal) {
+                                             Principal principal) throws ApplicationException {
+        followerService.unfollowUser(userId, principal);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -1,6 +1,5 @@
 package com.social.service.impl;
 
-import com.social.domain.entities.Chat;
 import com.social.domain.entities.ChatUsers;
 import com.social.domain.entities.User;
 import com.social.exception.ApplicationException;
@@ -23,6 +22,13 @@ public class ChatUsersServiceImpl implements ChatUsersService {
     private final ChatUsersRepository chatUsersRepository;
     private final UserService userService;
 
+    /**
+     * Create chat users for users
+     *
+     * @param userId - user id
+     * @param user   - user
+     * @throws ApplicationException - throw exception if user not found
+     */
     @Override
     public Set<ChatUsers> saveChatUsers(Long userId, User user) throws ApplicationException {
         Set<ChatUsers> chatUsers = new HashSet<>();
@@ -32,12 +38,23 @@ public class ChatUsersServiceImpl implements ChatUsersService {
         return chatUsers;
     }
 
+    /**
+     * Check exists chat with users
+     *
+     * @param fromUserId - first user id
+     * @param toUserId   - second user id
+     */
     @Override
     public boolean existsChatBetweenUsers(Long fromUserId, Long toUserId) {
         log.info("Check exists chat between users with id: {} and {}", fromUserId, toUserId);
         return chatUsersRepository.existsChatBetweenUsers(fromUserId, toUserId);
     }
 
+    /**
+     * Create entity
+     *
+     * @param user - user
+     */
     private ChatUsers buildChatUsers(User user) {
         return ChatUsers.builder()
                 .updatedAt(Instant.now())

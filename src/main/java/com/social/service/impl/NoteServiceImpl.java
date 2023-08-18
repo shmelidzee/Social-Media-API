@@ -27,6 +27,13 @@ public class NoteServiceImpl implements NoteService {
     private final UserService userService;
     private final NoteRepository noteRepository;
 
+    /**
+     * Delete note
+     *
+     * @param noteId - note id
+     * @param principal - principal
+     * @throws ApplicationException - throw exception if user not admin this note
+     */
     @Override
     public void deleteNote(Long noteId, Principal principal) throws ApplicationException {
         User user = userService.findUserByPrincipal(principal);
@@ -38,11 +45,23 @@ public class NoteServiceImpl implements NoteService {
         noteRepository.delete(note);
     }
 
+    /**
+     * Create note
+     *
+     * @param createNoteCommand - command for create note
+     * @param principal - principal
+     */
     @Override
     public NoteDTO createNote(CreateNoteCommand createNoteCommand, Principal principal) {
         return null;
     }
 
+    /**
+     * Update note
+     *
+     * @param updateNoteCommand - command for update note
+     * @param principal - principal
+     */
     @Override
     public NoteDTO updateNote(UpdateNoteCommand updateNoteCommand, Long noteId, Principal principal) {
         return null;

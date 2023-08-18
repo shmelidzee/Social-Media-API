@@ -36,6 +36,14 @@ public class ChatServiceImpl implements ChatService {
     private final ChatUsersService chatUsersService;
     private final ChatMapper chatMapper;
 
+
+    /**
+     * Create dual chat
+     *
+     * @param userId    - user id
+     * @param principal - principal
+     * @throws ApplicationException - throw exception if users is not friends or chats exists
+     */
     @Override
     public void createDualChat(Long userId, Principal principal) throws ApplicationException {
         User user = userService.findUserByPrincipal(principal);
@@ -49,6 +57,12 @@ public class ChatServiceImpl implements ChatService {
         chatRepository.save(buildChat(userId, user, ChatType.DUAL));
     }
 
+    /**
+     * Get my chats
+     *
+     * @param principal - principal
+     * @throws ApplicationException - throw exception if user not found
+     */
     @Override
     public List<ChatDTO> getChats(Principal principal) throws ApplicationException {
         User user = userService.findUserByPrincipal(principal);
@@ -59,6 +73,14 @@ public class ChatServiceImpl implements ChatService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Create entity chat
+     *
+     * @param userId - user id
+     * @param user   - user who make request
+     * @param type   - chat type
+     * @throws ApplicationException - throw exception if user not found
+     */
     private Chat buildChat(Long userId, User user, ChatType type) throws ApplicationException {
         return Chat.builder()
                 .admin(user.getId())
