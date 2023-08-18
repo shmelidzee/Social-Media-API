@@ -86,10 +86,18 @@ public class NoteServiceImpl implements NoteService {
         return noteMapper.entityToDTO(noteRepository.save(note));
     }
 
+    /**
+     * Get notes
+     *
+     * @param needToSortByDate - choose ASC or DESC on sorting by created date
+     * @param principal        - principal
+     * @param pageable         - pagination for request
+     * @throws ApplicationException - throw exception if user not found
+     */
     @Override
     public PageDTO<NoteDTO> getNotes(boolean needToSortByDate, Pageable pageable, Principal principal) throws ApplicationException {
         User user = userService.findUserByPrincipal(principal);
-        List<NoteProjection> notesProjection = null;
+        List<NoteProjection> notesProjection;
         if (needToSortByDate) {
             notesProjection = noteRepository.getNotes(user.getId(), true, pageable.getPageSize(), pageable.getPageSize() * pageable.getPageNumber());
         } else {

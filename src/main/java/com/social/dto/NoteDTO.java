@@ -20,5 +20,5 @@ public class NoteDTO {
     private String[] images;
     private Long authorId;
     private String authorUsername;
-    private String createAt;
+    private String createdAt;
 }

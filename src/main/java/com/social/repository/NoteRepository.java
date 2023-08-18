@@ -12,7 +12,6 @@ import java.util.List;
 @Repository
 public interface NoteRepository extends JpaRepository<Note, Long> {
 
-
     @Query(value = "SELECT n.id,\n" +
             "       n.title,\n" +
             "       n.text,\n" +

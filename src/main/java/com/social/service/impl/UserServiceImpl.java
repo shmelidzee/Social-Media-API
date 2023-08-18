@@ -21,7 +21,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
 
-import static com.social.utils.ExceptionConstants.*;
+import static com.social.utils.ExceptionConstants.INCORRECT_REGISTER_PASSWORD;
+import static com.social.utils.ExceptionConstants.INVALID_REGISTER_DATA;
+import static com.social.utils.ExceptionConstants.USER_ALREADY_EXISTS;
+import static com.social.utils.ExceptionConstants.USER_NOT_FOUND;
 import static com.social.utils.ExceptionUtils.buildApplicationException;
 
 @Service
