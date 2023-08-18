@@ -8,5 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateNoteCommand {
-    private Long id;
+    private String title;
+    private String text;
+    private String[] imagesUrl;
 }

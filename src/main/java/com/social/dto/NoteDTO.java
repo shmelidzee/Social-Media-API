@@ -15,5 +15,10 @@ import lombok.ToString;
 @ToString
 public class NoteDTO {
     private Long id;
-
+    private String title;
+    private String text;
+    private String[] images;
+    private Long authorId;
+    private String authorUsername;
+    private String createAt;
 }

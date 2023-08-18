@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateNoteCommand {
-    private Long id;
-
+    private String title;
+    private String text;
+    private String[] imagesUrl;
 }

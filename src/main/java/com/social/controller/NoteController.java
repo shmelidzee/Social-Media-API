@@ -3,6 +3,7 @@ package com.social.controller;
 import com.social.command.CreateNoteCommand;
 import com.social.command.UpdateNoteCommand;
 import com.social.dto.NoteDTO;
+import com.social.dto.PageDTO;
 import com.social.exception.ApplicationException;
 import com.social.service.NoteService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,6 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -42,37 +44,26 @@ public class NoteController {
             },
             tags = "Note")
     public ResponseEntity<NoteDTO> createNewNote(@RequestBody CreateNoteCommand createNoteCommand,
-                                                 Principal principal) {
+                                                 Principal principal) throws ApplicationException {
         NoteDTO note = noteService.createNote(createNoteCommand, principal);
         return ResponseEntity.ok(note);
     }
 
-    @GetMapping("/tape")
-    @Operation(summary = "Get tape of notes",
-            description = "Get tape of notes",
+    @GetMapping
+    @Operation(summary = "Get notes",
+            description = "Get notes",
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Get tape of notes"),
+                    @ApiResponse(responseCode = "200", description = "Get notes"),
                     @ApiResponse(responseCode = "400", description = "Bad request")
             },
             tags = "Note")
-    public ResponseEntity<?> getTapeOfNotes(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
-                                            @RequestParam(value = "size", required = false, defaultValue = "10") int size,
-                                            @RequestParam(value = "needToSortByDateCreate", required = false, defaultValue = "false") boolean needToSortByDateCreate,
-                                            Principal principal) {
-        return ResponseEntity.ok(null);
-    }
-
-    @GetMapping({"", "/{userId}"})
-    @Operation(summary = "Get my or user notes",
-            description = "Get my or user notes",
-            responses = {
-                    @ApiResponse(responseCode = "200", description = "Get my or user notes"),
-                    @ApiResponse(responseCode = "400", description = "Bad request")
-            },
-            tags = "Note")
-    public ResponseEntity<?> getNotes(@PathVariable(value = "userId", required = false) Long userId,
-                                      Principal principal) {
-        return ResponseEntity.ok(null);
+    public ResponseEntity<PageDTO<NoteDTO>> getTapeOfNotes(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
+                                                           @RequestParam(value = "size", required = false, defaultValue = "10") int size,
+                                                           @RequestParam(value = "needToSortByDateCreate", required = false, defaultValue = "true") boolean needToSortByDateCreate,
+                                                           Principal principal) throws ApplicationException {
+        Pageable pageable = Pageable.ofSize(size).withPage(page);
+        PageDTO<NoteDTO> notes = noteService.getNotes(needToSortByDateCreate, pageable, principal);
+        return ResponseEntity.ok(notes);
     }
 
     @PutMapping("/{noteId}")
@@ -85,7 +76,7 @@ public class NoteController {
             tags = "Note")
     public ResponseEntity<NoteDTO> updateMyNote(@RequestBody UpdateNoteCommand updateNoteCommand,
                                                 @PathVariable(name = "noteId") Long noteId,
-                                                Principal principal) {
+                                                Principal principal) throws ApplicationException {
         NoteDTO note = noteService.updateNote(updateNoteCommand, noteId, principal);
         return ResponseEntity.ok(note);
     }
