@@ -10,4 +10,5 @@ public class ExceptionConstants {
     public static final String USERS_NOT_FRIENDS = "You are not friend with user";
     public static final String CHAT_ALREADY_EXISTS = "You have chat with this user";
     public static final String NOT_HAVE_PERMISSION = "You are not author this note";
+    public static final String USER_ALREADY_EXISTS = "User already exists";
 }

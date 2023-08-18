@@ -91,9 +91,9 @@ public class NoteServiceImpl implements NoteService {
         User user = userService.findUserByPrincipal(principal);
         List<NoteProjection> notesProjection = null;
         if (needToSortByDate) {
-            notesProjection = noteRepository.getNotes(true, pageable.getPageSize(), pageable.getPageSize() * pageable.getPageNumber());
+            notesProjection = noteRepository.getNotes(user.getId(), true, pageable.getPageSize(), pageable.getPageSize() * pageable.getPageNumber());
         } else {
-            notesProjection = noteRepository.getNotes(false, pageable.getPageSize(), pageable.getPageSize() * pageable.getPageNumber());
+            notesProjection = noteRepository.getNotes(user.getId(), false, pageable.getPageSize(), pageable.getPageSize() * pageable.getPageNumber());
         }
         List<NoteDTO> notes = notesProjection.stream()
                 .map(noteMapper::projectionToDTO)

@@ -16,8 +16,8 @@ public interface FollowerRepository extends JpaRepository<Follower, Long> {
     @Query(value = "SELECT EXISTS (\n" +
             "    SELECT f.id\n" +
             "    FROM Follower f\n" +
-            "    WHERE (f.fromUser.id = :fromUserId AND f.toUser.id = :toUserId)\n" +
-            "        OR (f.toUser.id = :fromUserId AND f.fromUser.id = :toUserId))" +
+            "    WHERE (f.fromUser.id = :fromUser AND f.toUser.id = :toUser)\n" +
+            "        OR (f.toUser.id = :fromUser AND f.fromUser.id = :toUser))" +
             "FROM Follower")
     boolean isFriend(Long toUser, Long fromUser);
 

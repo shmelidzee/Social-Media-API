@@ -21,9 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
 
-import static com.social.utils.ExceptionConstants.INCORRECT_REGISTER_PASSWORD;
-import static com.social.utils.ExceptionConstants.INVALID_REGISTER_DATA;
-import static com.social.utils.ExceptionConstants.USER_NOT_FOUND;
+import static com.social.utils.ExceptionConstants.*;
 import static com.social.utils.ExceptionUtils.buildApplicationException;
 
 @Service
@@ -162,6 +160,10 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         }
         if (command.getPassword().length() < MIN_LENGTH_PASSWORD || command.getPassword().length() > MAX_SIZE_NAME_AND_PASSWORD) {
             throw buildApplicationException(HttpStatus.BAD_REQUEST, INCORRECT_REGISTER_PASSWORD);
+        }
+        if (userRepository.findByEmail(command.getEmail()).isPresent() || userRepository.findByUsername(command.getUsername()).isPresent()) {
+            throw buildApplicationException(HttpStatus.BAD_REQUEST, USER_ALREADY_EXISTS);
+
         }
     }
 }

@@ -124,6 +124,7 @@ public class FollowerServiceImpl implements FollowerService {
         } else {
             friends = optionalFriends.get();
             friends.setAccepted(true);
+            friends.setRead(true);
         }
         friendsRepository.save(friends);
     }

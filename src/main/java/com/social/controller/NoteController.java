@@ -57,10 +57,10 @@ public class NoteController {
                     @ApiResponse(responseCode = "400", description = "Bad request")
             },
             tags = "Note")
-    public ResponseEntity<PageDTO<NoteDTO>> getTapeOfNotes(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
-                                                           @RequestParam(value = "size", required = false, defaultValue = "10") int size,
-                                                           @RequestParam(value = "needToSortByDateCreate", required = false, defaultValue = "true") boolean needToSortByDateCreate,
-                                                           Principal principal) throws ApplicationException {
+    public ResponseEntity<PageDTO<NoteDTO>> getNotes(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
+                                                     @RequestParam(value = "size", required = false, defaultValue = "10") int size,
+                                                     @RequestParam(value = "needToSortByDateCreate", required = false, defaultValue = "true") boolean needToSortByDateCreate,
+                                                     Principal principal) throws ApplicationException {
         Pageable pageable = Pageable.ofSize(size).withPage(page);
         PageDTO<NoteDTO> notes = noteService.getNotes(needToSortByDateCreate, pageable, principal);
         return ResponseEntity.ok(notes);

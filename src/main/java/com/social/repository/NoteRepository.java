@@ -22,9 +22,10 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
             "       n.created_at as createdAt\n" +
             "FROM notes n\n" +
             "         LEFT JOIN users u on u.id = n.user_id\n" +
-            "WHERE (:sortByDate = true AND n.created_at IS NOT NULL)\n" +
-            "   OR (:sortByDate = false)\n" +
+            "WHERE ((:sortByDate = true AND n.created_at IS NOT NULL)\n" +
+            "   OR (:sortByDate = false))\n" +
+            "AND n.user_id in (select f.to_user from followers f where f.from_user = :userId)" +
             "ORDER BY n.created_at ASC\n" +
-            "limit :lim offset :off",nativeQuery = true)
-    List<NoteProjection> getNotes(boolean sortByDate, @Param("lim") Integer limit, @Param("off") Integer offset);
+            "limit :lim offset :off", nativeQuery = true)
+    List<NoteProjection> getNotes(Long userId, boolean sortByDate, @Param("lim") Integer limit, @Param("off") Integer offset);
 }

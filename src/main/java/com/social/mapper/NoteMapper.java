@@ -11,6 +11,7 @@ public interface NoteMapper {
 
     @Mapping(target = "authorId", source = "author.id")
     @Mapping(target = "authorUsername", source = "author.username")
+    @Mapping(target = "createdAt", source = "createdAt")
     NoteDTO entityToDTO(Note note);
 
     NoteDTO projectionToDTO(NoteProjection projection);
