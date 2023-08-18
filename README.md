@@ -20,3 +20,4 @@ sh run.sh will build the application and run it in a docker container
 1. Clone repository, go to root directory
 2. Run ./gradlew clean build test in root directory
 3. You will see the test results in the console
+![image](https://github.com/shmelidzee/Social-Media-API/assets/100793483/d03f46b3-9f92-4102-b755-2ffa1f1fbdbf)
