@@ -20,6 +20,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -46,6 +47,12 @@ public class Note {
     @Column(name = "IMAGES")
     @Convert(converter = StringArrayConverter.class)
     private String[] images;
+
+    @Column(name = "CREATED_AT")
+    private Instant createdAt;
+
+    @Column(name = "UPDATED_AT")
+    private Instant updatedAt;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
