@@ -12,6 +12,8 @@ sh run.sh will build the application and run it in a docker container
 7. Select the required request and execute it
 8. Check results requests
 ![image](https://github.com/shmelidzee/Social-Media-API/assets/100793483/903ef943-79bf-4c40-89c0-d7884bb9a393)
+![image](https://github.com/shmelidzee/Social-Media-API/assets/100793483/f91a93d6-3b91-4732-95d4-afca338458ab)
+
 
 
 # How to run tests
